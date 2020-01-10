@@ -1,0 +1,97 @@
+Dealer Management System                                   Daily Statement Report
+  Dhaka, Bangladesh,                             Form 01 Jan, 2019 to 03 Apr, 2019
+  Mobile: +8801500000. Mail: info@dms.com                                         
+  --------------------------------------------------------------------------------
+  Date	        Voucher No.     Chart of Accounts       Debit Tk.       Credit Tk.
+  --------------------------------------------------------------------------------
+                                                                                  
+  01.10.2019    1570950138      Accounts Receivable     21000                     
+                                Retailer Opening                        21000     
+  01.10.2019    1570950276	    Manufacturer Opening    5000                      
+                                Accounts Payable                        5000      
+  13.10.2019    1570950316      Accounts Receivable     50000                     
+                                Sales                                   50000     
+  13.10.2019    1570950364      Cash in Hand            20000                     
+                                Accounts Receivable                     30000     
+                                Sales                                   50000     
+  13.10.2019    1570950469      Cash in Hand            500994                    
+                                Retailer Advance                        500994    
+  13.10.2019    1570950618      Sales Return            15305                     
+                                Cash in Hand                            15305     
+  13.10.2019    1570950688      Retailer Advance        50000                     
+                                Cash in Hand                            50000     
+                                                                                  
+Dealer Management System                                   Daily Statement Report
+  Dhaka, Bangladesh,                             Form 03 Apr, 2019 to 02 Nov, 2019
+  Mobile: +8801500000. Mail: info@dms.com                                         
+  --------------------------------------------------------------------------------
+  Date	        Voucher No.     Chart of Accounts       Debit Tk.       Credit Tk.
+  --------------------------------------------------------------------------------
+                                                                                  
+  01.10.2019    1570950138      Accounts Receivable     0                         
+                                Retailer Opening                        0         
+  01.10.2019    1570950276	    Manufacturer Opening    5000                      
+                                Accounts Payable                        5000      
+  13.10.2019    1570950316      Accounts Receivable     50000                     
+                                Sales                                   50000     
+  13.10.2019    1570950364      Cash in Hand            20000                     
+                                Accounts Receivable                     30000     
+                                Sales                                   50000     
+  13.10.2019    1570950469      Cash in Hand            100000                    
+                                Retailer Advance                        100000    
+  13.10.2019    1570950520      Retailer Advance        50000                     
+                                Sales                                   50000     
+  13.10.2019    1570950563      Sales Return            25000                     
+                                Accounts Receivable                     25000     
+  13.10.2019    1570950601      Sales Return            25000                     
+                                Sales Return                            25000     
+                                Accounts Receivable                     30000     
+                                Cash in Hand            30000                     
+  13.10.2019    1570950618      Sales Return            25000                     
+                                Cash in Hand                            25000     
+  13.10.2019    1570950688      Retailer Advance        50000                     
+                                Cash in Hand                            50000     
+                                                                                  
+Dealer Management System                                   Daily Statement Report
+  Dhaka, Bangladesh,                             Form 03 Nov, 2019 to 02 Jan, 2020
+  Mobile: +8801500000. Mail: info@dms.com                                         
+  --------------------------------------------------------------------------------
+  Date	        Voucher No.     Chart of Accounts       Debit Tk.       Credit Tk.
+  --------------------------------------------------------------------------------
+                                                                                  
+  01.12.2019    1570950745	    Manufacturer Opening    5000                      
+                                Accounts Payable                        5000      
+  10.12.2019    1570950854      Accounts Receivable     50000                     
+                                Sales                                   50000     
+  13.12.2019    1570950888      Cash in Hand            20000                     
+                                Accounts Payable                        5000      
+                                Accounts Receivable                     30000     
+                                Sales                                   50000     
+  13.12.2019    1570950898      Cash in Hand            100000                    
+                                Retailer Advance                        100000    
+  16.12.2019    1570950920      Retailer Advance        50000                     
+                                Cash in Hand                            25000     
+  30.12.2019    1570951188      Retailer Advance        50000                     
+                                Cash in Hand                            50000     
+                                                                                  
+Dealer Management System                                   Daily Statement Report
+  Dhaka, Bangladesh,                             Form 03 Jan, 2020 to 10 Mar, 2020
+  Mobile: +8801500000. Mail: info@dms.com                                         
+  --------------------------------------------------------------------------------
+  Date	        Voucher No.     Chart of Accounts       Debit Tk.       Credit Tk.
+  --------------------------------------------------------------------------------
+                                                                                  
+  01.02.2019    1570950745	    Manufacturer Opening    5000                      
+                                Accounts Payable                        5000      
+  10.02.2019    1570950854      Accounts Receivable     50000                     
+                                Sales                                   50000     
+  13.02.2019    1570950888      Cash in Hand            20000                     
+                                Accounts Payable                        5000      
+                                Accounts Receivable                     30000     
+                                Sales                                   50000     
+  13.02.2019    1570950898      Cash in Hand            100000                    
+                                Retailer Advance                        100000    
+  02.03.2019    1570950920      Retailer Advance        50000                     
+                                Cash in Hand                            25000     
+  09.03.2019    1570951188      Retailer Advance        50000                     
+                                Cash in Hand                            50000     
