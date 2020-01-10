@@ -92,7 +92,7 @@ function mergedObjectForCSV(indextrackingArr, jsonObjArr){
         return outPutArrForCSV;
 }
 function funcForDebit(debitData){
-    let outputDataForCSV = [];
+    let outputDataForCSV = ['Date','VoucherNO','Amount','TransType'];
     for(let k=0; k<debitData.length ; k++){
         const curObjTobeInserted = debitData[k];
         const curDebitAmnt = curObjTobeInserted.DebitAmount;
@@ -105,7 +105,7 @@ function funcForDebit(debitData){
     return outputDataForCSV;
 }
 function funcForCredit(creditData){
-    let outputDataForCSV = [];
+    let outputDataForCSV = ['Date','VoucherNO','Amount','TransType'];
     for(let k=0; k<creditData.length ; k++){
         const curObjTobeInserted = creditData[k];
         const curDebitAmnt = curObjTobeInserted.CreditAmount;
