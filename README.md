@@ -1,5 +1,4 @@
 # FileReader_Inflac
-# FileReader_Inflac
 
 
 To run this file we have to installed latest version of node.js first.
