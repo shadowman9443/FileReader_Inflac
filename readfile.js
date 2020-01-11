@@ -1,95 +1,114 @@
+
 const fs = require('fs');
-const readline = require('readline');
+const config = require('./config.js');
+
 function convert(file) {
     fs.readFile(file, function (err, data) {
         if (err) throw err;
-        var array = data.toString().split("\n");
-        let beforedatapushcount = 0;
-        let convertedTxTdataArr = [];
-        for (i in array) {
-            if (array[i].charCodeAt(0) === 12) {
-                beforedatapushcount = 0;
-            }
-            beforedatapushcount++;
-            if (beforedatapushcount > 7) {
-                convertedTxTdataArr.push(array[i]);
-            }
-
-        }
-        let tempJsonObjArr = [];
-        let trackIndexForNotNullDateArr = [];
-        for (let i = 0; i < convertedTxTdataArr.length; i++) {
-            let singleDateData = convertedTxTdataArr[i].split(/\s{2,}/);
-            let datewithdatacounter = 0;
-            const convertedObjectdata = {
-                'Date': '',
-                'VoucherNo': [],
-                'DebitChart': [],
-                'DebitAmount': [],
-                'CreditChart': [],
-                'CreditAmount': []
-            }
-            for(let j = 0; j<singleDateData.length;j++){
-                if(singleDateData[j] !=''){                   
-                    if(isValidDate(singleDateData[j]))
-	                {
-                        convertedObjectdata.Date = singleDateData[j];
-                        trackIndexForNotNullDateArr.push(i);
-                        datewithdatacounter++;
-	                }else if(!isNaN(singleDateData[j])){
-                        if(datewithdatacounter==1){
-                            convertedObjectdata.VoucherNo = singleDateData[j];
-                            datewithdatacounter++;
-                        }else if(datewithdatacounter>1){
-                            convertedObjectdata.DebitAmount.push(singleDateData[j]);
-                            datewithdatacounter++;
-                        }else if(datewithdatacounter==0){
-                            convertedObjectdata.CreditAmount.push(singleDateData[j]);
-                        }
-                    }else{
-                        if(datewithdatacounter>0){
-                            convertedObjectdata.DebitChart.push(singleDateData[j]);
-                            datewithdatacounter++;
-                        }else{
-                            convertedObjectdata.CreditChart.push(singleDateData[j]);
-                        }
-                    }
-                }
-               
-            } 
-            datewithdatacounter = 0;
-            tempJsonObjArr.push(convertedObjectdata);    
-        }
-        let dataForCSV = [];
-        dataForCSV = mergedObjectForCSV(trackIndexForNotNullDateArr,tempJsonObjArr);
-        const debitData = funcForDebit(dataForCSV);
+        const  convertDailtyStatementDataArray = data.toString().split("\n");
+        const arrayOfActualReportDataArray = pushActualReportDataToArray(convertDailtyStatementDataArray);
+        
+        const resultObjecToConevrtJson = convertReportRowToJsonOject(arrayOfActualReportDataArray);
+        const tempJsonObjArrWithAllReporData = resultObjecToConevrtJson.jsonObjectArrayForEveryRowofREport;
+        const trackIndexRowWithDateArr = resultObjecToConevrtJson.trackIndexForRowWithDate
+        const dateWiseFinaleJsonArrdataForCSV = mergedObjectForCSV(trackIndexRowWithDateArr,tempJsonObjArrWithAllReporData);
+        const debitData = funcForDebit(dateWiseFinaleJsonArrdataForCSV);
         console.log(debitData);
         console.log('*******************');
-        const creditData = funcForCredit(dataForCSV);
+        const creditData = funcForCredit(dateWiseFinaleJsonArrdataForCSV);
         console.log(creditData);
        
     });
 }
-function mergedObjectForCSV(indextrackingArr, jsonObjArr){
-        const outPutArrForCSV = [];
+function convertReportRowToJsonOject(reportDataArray) {
+    let jsonObjectArrayForEveryRowofREport = [];
+    let trackIndexForRowWithDate = [];
+    for (let i = 0; i < reportDataArray.length; i++) {
+        let singleRowData = reportDataArray[i].split(/\s{2,}/);
+        let rowWithDateCounter = 0;
+        const everyRowOfReportDataAsObject = {
+            'Date': '',
+            'VoucherNo': [],
+            'DebitChart': [],
+            'DebitAmount': [],
+            'CreditChart': [],
+            'CreditAmount': []
+        }
+        for(let j = 0; j<singleRowData.length;j++){
+            if(singleRowData[j] !=''){                   
+                if(isValidDate(singleRowData[j]))
+                {
+                    everyRowOfReportDataAsObject.Date = singleRowData[j];
+                    trackIndexForRowWithDate.push(i);
+                    rowWithDateCounter++;
+                }else if(!isNaN(singleRowData[j])){
+                    if(rowWithDateCounter==1){
+                        everyRowOfReportDataAsObject.VoucherNo = singleRowData[j];
+                        rowWithDateCounter++;
+                    }else if(rowWithDateCounter>1){
+                        everyRowOfReportDataAsObject.DebitAmount.push(singleRowData[j]);
+                        rowWithDateCounter++;
+                    }else if(rowWithDateCounter==0){
+                        everyRowOfReportDataAsObject.CreditAmount.push(singleRowData[j]);
+                    }
+                }else{
+                    if(rowWithDateCounter>0){
+                        everyRowOfReportDataAsObject.DebitChart.push(singleRowData[j]);
+                        rowWithDateCounter++;
+                    }else{
+                        everyRowOfReportDataAsObject.CreditChart.push(singleRowData[j]);
+                    }
+                }
+            }
+           
+        } 
+        rowWithDateCounter = 0;
+        jsonObjectArrayForEveryRowofREport.push(everyRowOfReportDataAsObject);    
+    }
+    const objectWIthJsonRowArrAndTrackIndex = {
+        jsonObjectArrayForEveryRowofREport,trackIndexForRowWithDate
+    };
+    return objectWIthJsonRowArrAndTrackIndex;
+}
+function pushActualReportDataToArray(arrayOfDataReadFromStatement) {
+    let actualReportDataStartingCount = 0;
+    //config.linBreakAciiCode 
+    console.log(config );
+    let arrayOfReportDataOnly = [];
+    for (i in arrayOfDataReadFromStatement) {
+        if (arrayOfDataReadFromStatement[i].charCodeAt(0) === config.linBreakAciiCode ) {
+            actualReportDataStartingCount = 0;
+        }
+        actualReportDataStartingCount++;
+        if (actualReportDataStartingCount > config.reportDataStartingLine) {
+            arrayOfReportDataOnly.push(arrayOfDataReadFromStatement[i]);
+        }
+    }
+    return arrayOfReportDataOnly;
+}
+function mergedObjectForCSV(indextrackingArr, jsonObjArrEveryRow){
+        const singleDateObjectArrForCsv = [];
         for(let k=0; k<indextrackingArr.length ; k++){
             let index = indextrackingArr[k];
-            const dateWithObj = jsonObjArr[index];
+            const dateWithObj = jsonObjArrEveryRow[index];
             for(let l=indextrackingArr[k];l<indextrackingArr[k+1];l++){
                 if(l===index) continue;
                 
-                const mergedObj = jsonObjArr[l];
+                const withOutDateObj = jsonObjArrEveryRow[l];
                 
-                dateWithObj.DebitChart = dateWithObj.DebitChart.concat(mergedObj.DebitChart);
-                dateWithObj.CreditChart = dateWithObj.CreditChart.concat(mergedObj.CreditChart);
-                dateWithObj.CreditAmount = dateWithObj.CreditAmount.concat(mergedObj.CreditAmount);
-                dateWithObj.DebitAmount = dateWithObj.DebitAmount.concat(mergedObj.DebitAmount);
+                dateWithObj.DebitChart = mergedArray(dateWithObj.DebitChart,withOutDateObj.DebitChart);
+                dateWithObj.CreditChart = mergedArray(dateWithObj.CreditChart,withOutDateObj.CreditChart);
+                dateWithObj.CreditAmount = mergedArray(dateWithObj.CreditAmount,withOutDateObj.CreditAmount);
+                dateWithObj.DebitAmount = mergedArray(dateWithObj.DebitAmount,withOutDateObj.DebitAmount);
                 
 
             }
-            outPutArrForCSV.push(dateWithObj);
+            singleDateObjectArrForCsv.push(dateWithObj);
         }
-        return outPutArrForCSV;
+        return singleDateObjectArrForCsv;
+}
+function mergedArray(mergedWithArr,toBeMergedArr) {
+    return mergedWithArr.concat(toBeMergedArr);
 }
 function funcForDebit(debitData){
     let outputDataForCSV = ['Date','VoucherNO','Amount','TransType'];
